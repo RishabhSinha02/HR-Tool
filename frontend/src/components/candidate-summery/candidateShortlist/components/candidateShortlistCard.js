@@ -124,8 +124,8 @@ const CandidateShortlistCard = ({ process, round }) => {
     document.getElementById(`interview_shedule_modal-${process.candidateId._id}`).close();
     e.preventDefault();
     setIsMailing(true);
-    console.log("Sending Email .....");
-    console.log(process);
+    // console.log("Sending Email .....");
+    // console.log(process);
     try {
       const response = await axiosnew.post(`/process/send-mail`,
         {
@@ -148,11 +148,11 @@ const CandidateShortlistCard = ({ process, round }) => {
     } catch (error) {
       console.error("Error during sending email.");
     }
-    setIsMailing(false);
   };
 
 
   const handleWhatsappMessage = () => {
+    document.getElementById(`interview_shedule_modal-${process.candidateId._id}`).close();
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -167,6 +167,11 @@ const CandidateShortlistCard = ({ process, round }) => {
       body: raw,
       redirect: "follow"
     };
+
+    setMailAlert(true);
+        setTimeout(() => {
+          setMailAlert(false);
+        }, 4000);
 
     fetch("http://127.0.0.1:5000/send_notification", requestOptions)
       .then((response) => response.text())
@@ -935,7 +940,7 @@ const CandidateShortlistCard = ({ process, round }) => {
               />
             </svg>
 
-            <span>Interview Email sent to {process?.candidateId?.name}</span>
+            <span>Interview Message sent to {process?.candidateId?.name} via Whatsapp</span>
           </div>
         )}
       </div>
