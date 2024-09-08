@@ -1,0 +1,18 @@
+# Node modules
+node_modules/
+
+# Generated build files
+build/
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Dependency lock file
+yarn.lock
