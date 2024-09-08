@@ -9,8 +9,7 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-# account_sid = 'AC2b62ec2b843ed4c15c2798443885dcbe'
-# auth_token = '6118ac105d0780265f9e03fa9101a6a9'
+
 client = Client(account_sid, auth_token)
 
 def parse_html_to_plain_text(html_content):
