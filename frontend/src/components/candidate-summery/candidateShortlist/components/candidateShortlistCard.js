@@ -661,7 +661,7 @@ const CandidateShortlistCard = ({ process, round }) => {
                     <div className="mx-4">
                       <div className="flex gap-4" style={{ fontSize: "15px" }}>
                         <span className="loading loading-bars loading-md"></span>
-                        <div>Generating Email...</div>
+                        <div>Generating WhatsApp Message...</div>
                       </div>
                     </div>
                   )}
@@ -672,7 +672,7 @@ const CandidateShortlistCard = ({ process, round }) => {
                     style={{ backgroundColor: "#CFA0FF" }}
                     onClick={handleGenerateEmail}
                   >
-                    Generate Email
+                    Generate Message
                   </div>
 
                   <form method="dialog">
