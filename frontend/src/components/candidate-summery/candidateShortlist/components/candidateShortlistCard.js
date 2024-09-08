@@ -117,11 +117,15 @@ const CandidateShortlistCard = ({ process, round }) => {
 
 
   };
+
+
   // for sending email 
   const handleaddCandidate = async (e) => {
     document.getElementById(`interview_shedule_modal-${process.candidateId._id}`).close();
     e.preventDefault();
     setIsMailing(true);
+    console.log("Sending Email .....");
+    console.log(process);
     try {
       const response = await axiosnew.post(`/process/send-mail`,
         {
@@ -136,15 +140,38 @@ const CandidateShortlistCard = ({ process, round }) => {
         });
       if (response.status === 200) {
         console.log("Email Sent Successfully");
-      setMailAlert(true);
-      setTimeout(() => {
-        setMailAlert(false);
-      }, 4000);
+        setMailAlert(true);
+        setTimeout(() => {
+          setMailAlert(false);
+        }, 4000);
       }
     } catch (error) {
       console.error("Error during sending email.");
     }
     setIsMailing(false);
+  };
+
+
+  const handleWhatsappMessage = () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      "mobile_number": "8806608430",
+      "body": generatedEmail,
+    });
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch("http://127.0.0.1:5000/send_notification", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -648,7 +675,8 @@ const CandidateShortlistCard = ({ process, round }) => {
                     <button
                       className="generate cursor-pointer card border py-3 px-3 bg-white items-center self-center rounded-md font-bold"
                       style={{ backgroundColor: "#8EE4FF" }}
-                      onClick={handleaddCandidate}
+                      // onClick={handleaddCandidate}
+                      onClick={handleWhatsappMessage}
                     >
 
                       {isMailing ?
